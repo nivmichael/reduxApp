@@ -1,5 +1,5 @@
 # Michael's reduxApp
-####First React-Redux App
+#### First React-Redux App
 
 ## Install:
 ```
