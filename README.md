@@ -3,6 +3,7 @@
 
 ## Install:
 ```
+git clone https://github.com/nivmichael/reduxApp.git
 npm install
 npm i webpack -g
 npm install -g webpack-cli
