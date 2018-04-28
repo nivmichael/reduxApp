@@ -6,7 +6,8 @@ const reducer = function(state = {books:[]}, action) {
     switch (action.type) {
         case "POST_BOOK":
             let books = state.books.concat(action.payload);
-            return {books};
+            //return {books};
+            return {books: [...state.books,...action.payload]}
         break;
     }
 }
@@ -25,7 +26,7 @@ store.dispatch({
         {
             id: 1,
             title: 'No. 1 book',
-            description: 'This is the desc of No.1',
+            description: 'This is the description of No.1',
             price: '99.99$'
 
         },
