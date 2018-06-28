@@ -1,19 +1,23 @@
 "use strict"
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
+import logger from 'redux-logger';
 
 //Imports combined reducers
 import reducers from './reducers/index';
+// Import actions
+import {addToCart} from './actions/cartActions';
+import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
 // Step 1 create the store
-const store = createStore(reducers);
+const middleware = applyMiddleware(logger);
+const store = createStore(reducers, middleware);
 
-store.subscribe(function() {
-    console.log('current state is: ', store.getState());
-})
+//store.subscribe(function() {
+//    console.log('current state is: ', store.getState());
+//})
 
 // Step 2 create and dispatch actions
-store.dispatch({
-    type: "POST_BOOK",
-    payload: [
+store.dispatch(postBooks(
+    [
         {
             id: 1,
             title: 'No. 1 book',
@@ -26,26 +30,18 @@ store.dispatch({
             title: 'No. 2 book',
             description: 'This is the desc of No.2',
             price: '500.99$'
-        }]
-})
-
-// Dispatch a second action
-store.dispatch({
-    type: "DELETE_BOOK",
-    payload:{id: 1}
-})
-
-//Update
-store.dispatch({
-    type: "UPDATE_BOOK",
-    payload: {
+        }
+    ]
+))
+store.dispatch(deleteBooks(
+    {id: 1}
+))
+store.dispatch(updateBooks(
+    {
         id: 2,
         title: 'michael book'
     }
-})
+))
 
 //Add to cart
-store.dispatch({
-    type: "ADD_TO_CART",
-    payload: { id: 2 }
-})
+store.dispatch(addToCart([{id: 1}]))
